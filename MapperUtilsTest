@@ -1,0 +1,34 @@
+package com.demo.util;
+
+import com.burst.sedin.entity.DataRegion;
+import com.fasterxml.jackson.databind.JavaType;
+import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
+import org.junit.Assert;
+import org.junit.Test;
+
+import java.util.*;
+
+
+@Slf4j
+public class MapperUtilsTest {
+
+    @Test
+    public void map2pojoJson() throws Exception {
+        Map<String, Object> map = new LinkedHashMap<>();
+        map.put("pId", 7);
+        String s = MapperUtils.obj2json(map);
+
+        Person person = MapperUtils.json2pojo(s, Person.class);
+        System.out.println(person);
+    }
+
+    @Data
+    static
+    class Person {
+        String name;
+        String age;
+        String gender;
+        String pId;
+    }
+}
