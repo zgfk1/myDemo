@@ -1,6 +1,8 @@
 package com.demo.util;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JavaType;
@@ -17,7 +19,10 @@ import java.util.Map;
 public class MapperUtils {
 
     private final static ObjectMapper OBJECT_MAPPER = new ObjectMapper();
-
+    static {
+        //这将使所有成员字段都可序列化，而无需进一步的注释，而不仅仅是公共字段（默认设置）。
+        OBJECT_MAPPER.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
+    }
     public static ObjectMapper getInstance() {
         return OBJECT_MAPPER;
     }
